@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: integration-suite-test-component-git-source-vnsq
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: integration-suite-test-component-git-source-vnsq
+    app.kubernetes.io/part-of: integ-app-pske
+  name: integration-suite-test-component-git-source-vnsq
+  namespace: integration-e2e-tenant
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: python-app
+      app.kubernetes.io/instance: integration-suite-test-component-git-source-vnsq
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python-app
+        app.kubernetes.io/instance: integration-suite-test-component-git-source-vnsq
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio-qe/test-images:bbe7f50b488049349e7d1c2432d06b8c
+        name: my-python
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+status: {}
